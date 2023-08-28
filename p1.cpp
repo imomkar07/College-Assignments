@@ -14,7 +14,7 @@ class HashTable
     private:
     Employee Data[10];
     public:
-    HashTable()
+    HashTable() /*Hash Table is created*/
     {
         for(int i=0;i<10;i++)
         {
@@ -24,7 +24,7 @@ class HashTable
         }
     }
 
-    int HashValue(int num)
+    int HashValue(int num) /*Hash value is calculated by using modulo division method*/
     {
         int iHash_Value;
         iHash_Value = num%10;
@@ -32,7 +32,7 @@ class HashTable
     }
 
 
-    void insertRecord_linear(string name, int id, string city)
+    void insertRecord_linear(string name, int id, string city) /*Insertition using linear probing*/
     {
         int index = HashValue(id);
         if(Data[index].iEmpId==-1)
@@ -59,7 +59,18 @@ class HashTable
         }        
     }
 
-    void search_linear()
+    void display_linear() //linearly probed data is displayed
+    {
+        cout<<endl<<endl<<"Entered data is"<<endl;
+        for(int i=0 ; i<10; i++)
+        {
+            if(Data[i].iEmpId!=-1){
+                cout<<"Name : "<<Data[i].sName<<endl<<"Id :"<<Data[i].iEmpId<<endl<<"City : "<<Data[i].sCity<<endl<<endl;
+            }
+        }
+    }
+
+    void search_linear()  /*search using linear probing*/
     {
         int num;
         cout<<"Employee id to be searched = ";
@@ -81,6 +92,7 @@ class HashTable
           {
             if(Data[Newindex].iEmpId==num)
             {
+                
                 cout<<"Details of employee id "<<num<<" is:"<<endl;
                 cout<<"Name : "<< Data[Newindex].sName<<endl;
                 cout<<"Id : "<< Data[Newindex].iEmpId<<endl;
@@ -95,7 +107,7 @@ class HashTable
         }
     }
     
-     void insertRecord_quadratic(string name, int id, string city)
+     void insertRecord_quadratic(string name, int id, string city)  /*Insertition using Quadratic probing*/
     {
         int index = HashValue(id);
         if(Data[index].iEmpId==-1)
@@ -124,7 +136,18 @@ class HashTable
         }
     }
 
-    void search_quadratic()
+    void display_quadratic() //Quadratically probed data is displayed
+    {
+        cout<<endl<<endl<<"Entered data is"<<endl;
+        for(int i=0 ; i<10; i++)
+        {
+            if(Data[i].iEmpId!=-1){
+                cout<<"Name : "<<Data[i].sName<<endl<<"Id :"<<Data[i].iEmpId<<endl<<"City : "<<Data[i].sCity<<endl<<endl;
+            }
+        }
+    }
+
+    void search_quadratic()  /*Search using Quadratic probing*/
     {
         int num;
         cout<<"Employee id to be searched = ";
@@ -166,15 +189,15 @@ class HashTable
 
 int main()
 {
-    HashTable ht;
+    HashTable ht; /*Object is created*/
     cout<<"Enter probing method"<<endl<<"1.linear"<<endl<<"2.Quadratic"<<endl;
     int choice;
-    cin>>choice;
+    cin>>choice;/*choice is given*/
     switch(choice)
     {
-        case 1 :
+        case 1 : //linear probing is executed
              cout<<"linear probing is executed"<<endl;
-             for (int i = 0; i < 4; i++) 
+             for (int i = 0; i < 10; i++) 
              {
                 string name, city;
                 int id;
@@ -189,9 +212,9 @@ int main()
                 ht.insertRecord_linear(name, id, city);
             }
             break;
-        case 2 :
+        case 2 : 
              cout<<"Quadratic probing is executed"<<endl;
-             for (int i = 0; i < 3; i++) 
+             for (int i = 0; i < 10; i++) 
              {
                 string name, city;
                 int id;
@@ -209,10 +232,12 @@ int main()
     }
    if(choice==1)
    {
+      ht.display_linear();
       ht.search_linear(); 
    }
    else if(choice==2)
    {
+       ht.display_quadratic();
        ht.search_quadratic();
    }
 }
